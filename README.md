@@ -132,3 +132,12 @@ Type motorbike:
 https://informo.madrid.es/cameras/Camara06308.jpg?v=728523069 0.787713885307312
 
 ```
+
+
+## Examples
+
+![Example1](example.png?raw=true "Example 1")
+
+![Example](example2.png?raw=true "Example 2")
+
+![Example](example3.png?raw=true "Example 3")
