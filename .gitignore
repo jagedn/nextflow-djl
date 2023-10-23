@@ -1,0 +1,6 @@
+/.idea/
+/.nextflow/
+/work/
+/.nextflow.log
+/.nextflow.log.*
+*.iml
