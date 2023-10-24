@@ -9,40 +9,23 @@ urls = camarasList.collect{idx ->
     patternURL.formatted(idx, Math.abs(new Random().nextInt()))
 }
 
-
-process DOWNLOAD_JPG{
-  input:
-    val url
-  output:
-    tuple val(url), val(image)
-  exec:
-    image = "$url".toURL().bytes
-}
-
 process DETECT_OBJECTS{
   input:
-  tuple val(url), val(image)
+    val (url)
   output:
     val objects
   exec:
-    objects = ImageDetection.detectObjects(url, image)
+    objects = ImageDetection.detectObjectsFromURL(url)
 }
 
 workflow {
 
   Channel.fromList(urls)
-          | DOWNLOAD_JPG
           | DETECT_OBJECTS
           | flatMap
-          | filter { ImageDetected img -> img.probability > 0.6}
-          | map { ImageDetected img -> [img.clazz, img]}
+          | filter { img -> img.probability > 0.6}
+          | map { img -> [img.clazz, img]}
           | groupTuple
-          | view { tuple ->
-            println "Type ${tuple[0]}:"
-            tuple[1].each{
-              println "$it.url $it.probability"
-            }
-          }
-
+          | view
 
 }

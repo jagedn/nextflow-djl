@@ -7,9 +7,9 @@ import ai.djl.repository.zoo.Criteria
 
 class ImageDetection {
 
-    static List<ImageDetected> detectObjects(String url, byte[] imgPath){
+    static List<ImageDetected> detectObjectsFromURL(String url){
 
-        Image img = ImageFactory.instance.fromInputStream(new ByteArrayInputStream(imgPath))
+        Image img = ImageFactory.instance.fromUrl(url)
 
         def criteria = Criteria.builder()
                 .optApplication(Application.CV.OBJECT_DETECTION)
